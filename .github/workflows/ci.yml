@@ -1,0 +1,60 @@
+name: C++ Multimedia Player CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            cmake \
+            qt6-base-dev \
+            qt6-multimedia-dev \
+            libgtest-dev \
+            ffmpeg
+
+      # 3. Configure project
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      # 4. Build project
+      - name: Build application
+        run: |
+          cmake --build build
+
+      # 5. Run unit tests
+      - name: Run tests
+        run: |
+          ctest --test-dir build --output-on-failure
+
+      # 6. Run deployment script
+      - name: Create deployment package
+        run: |
+          chmod +x scripts/deploy.sh
+          ./scripts/deploy.sh
+
+      # 7. Upload generated package
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: MediaPlayer-Linux
+          path: packages/MediaPlayer-Linux.tar.gz
