@@ -1,0 +1,26 @@
+ō# Build directory
+build/
+
+# Deployment output
+release/
+packages/
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.so
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
