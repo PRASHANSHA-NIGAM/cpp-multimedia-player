@@ -1,44 +1,44 @@
 # C++ Multimedia Player
 
-A Linux-based multimedia player built using C++17, Qt 6, FFmpeg, and CMake.
+A Linux-based multimedia player built using **C++17, Qt 6, FFmpeg, and CMake**.
 
-The project demonstrates multimedia playback, basic video processing, automated testing, build automation, and CI/CD using GitHub Actions.
+The project demonstrates multimedia playback, basic video processing, automated testing, build automation, deployment packaging, and CI/CD using GitHub Actions.
 
 ---
 
 ## Features
 
-- Video playback
-- Play, Pause, and Stop controls
-- Video file selection
-- Video seeking
-- Volume control
-- Video information
-- Frame extraction using FFmpeg
-- Video resizing to 720p
-- Video format conversion
-- Automated unit testing
-- CMake-based build system
-- Bash build, test, and deployment scripts
-- GitHub Actions CI pipeline
-- Automated GitHub releases
-- Linux deployment package generation
+* Video file selection
+* Video playback
+* Play, Pause, and Stop controls
+* Video seeking
+* Volume control
+* Basic video information
+* Frame extraction using FFmpeg
+* Video resizing to 720p
+* Video format conversion
+* Automated unit testing
+* CMake-based build system
+* Bash build, test, and deployment scripts
+* GitHub Actions CI pipeline
+* Automated GitHub releases
+* Linux deployment package generation
 
 ---
 
 ## Technologies
 
-| Technology | Purpose |
-|------------|---------|
-| C++17 | Application development |
-| Qt 6 | GUI and multimedia functionality |
-| FFmpeg | Video processing |
-| CMake | Build configuration |
-| GoogleTest | Unit testing |
-| Bash | Build and deployment automation |
-| Git | Version control |
-| GitHub Actions | CI/CD |
-| Linux | Development and deployment environment |
+| Technology         | Purpose                                    |
+| ------------------ | ------------------------------------------ |
+| **C++17**          | Core application development               |
+| **Qt 6**           | GUI and multimedia functionality           |
+| **FFmpeg**         | Video processing and media operations      |
+| **CMake**          | Build configuration and project management |
+| **GoogleTest**     | Unit testing                               |
+| **Bash**           | Build, testing, and deployment automation  |
+| **Git**            | Version control                            |
+| **GitHub Actions** | CI/CD automation                           |
+| **Linux**          | Development and deployment environment     |
 
 ---
 
@@ -76,10 +76,15 @@ cpp-multimedia-player/
 ├── CMakeLists.txt
 ├── README.md
 └── .gitignore
-Architecture
+```
 
-The application is divided into separate components.
+---
 
+## Architecture
+
+The application is divided into separate components to keep the GUI, multimedia functionality, and video-processing logic organized.
+
+```text
                     C++ Multimedia Player
                             │
               ┌─────────────┴─────────────┐
@@ -90,34 +95,46 @@ The application is divided into separate components.
               │                           ├── Video Resize
               │                           └── Format Conversion
               │
-              └── Qt Multimedia
-                        │
-                        ▼
-                      FFmpeg
-MainWindow
+              ▼
+        Qt Multimedia
+              │
+              ▼
+           FFmpeg
+```
 
-Responsible for:
+### MainWindow
 
-Creating the GUI
-Opening video files
-Play/Pause/Stop controls
-Seek functionality
-Volume control
-Connecting UI actions with multimedia functionality
-VideoProcessor
+`MainWindow` manages the application's graphical user interface and user interactions.
 
-Responsible for basic video-processing operations such as:
+Responsibilities include:
 
-Extracting video frames
-Resizing videos
-Converting video formats
-Running FFmpeg processing commands
-Requirements
+* Creating and managing the GUI
+* Opening video files
+* Play, Pause, and Stop controls
+* Seek functionality
+* Volume control
+* Connecting UI actions with multimedia functionality
 
-The project is designed for Linux.
+### VideoProcessor
 
-Install the required packages:
+`VideoProcessor` handles basic video-processing operations using FFmpeg.
 
+Responsibilities include:
+
+* Extracting video frames
+* Resizing videos
+* Converting video formats
+* Executing FFmpeg-based processing operations
+
+---
+
+## Requirements
+
+The project is designed for a Linux environment.
+
+Install the required dependencies:
+
+```bash
 sudo apt update
 
 sudo apt install -y \
@@ -129,105 +146,170 @@ sudo apt install -y \
     qt6-base-dev \
     qt6-multimedia-dev \
     libgtest-dev
-Build
+```
+
+---
+
+## Build
 
 Clone the repository:
 
+```bash
 git clone https://github.com/PRASHANSHA-NIGAM/cpp-multimedia-player.git
+```
 
-Enter the project directory:
+Navigate to the project directory:
 
+```bash
 cd cpp-multimedia-player
+```
 
-Configure the project:
+Configure the project using CMake:
 
+```bash
 cmake -S . -B build
+```
 
 Build the application:
 
+```bash
 cmake --build build
-Run
+```
 
-After a successful build:
+---
 
+## Run
+
+After a successful build, start the application with:
+
+```bash
 ./build/MediaPlayer
+```
 
-The Qt GUI will start and allow you to select and play a video file.
+The Qt-based GUI will open and allow you to select and play a video file.
 
-Testing
+---
 
-The project uses GoogleTest and CTest for unit testing.
+## Testing
 
-Run:
+The project uses **GoogleTest** and **CTest** for automated unit testing.
 
+Run the test suite using CTest:
+
+```bash
 ctest --test-dir build --output-on-failure
+```
 
-Or use the automated test script:
+You can also use the automated test script:
 
+```bash
 ./scripts/test.sh
+```
 
 Example result:
 
+```text
 100% tests passed, 0 tests failed
-Video Processing
+```
+
+---
+
+## Video Processing
 
 FFmpeg is used for basic video-processing operations.
 
-Frame Extraction
+### Frame Extraction
 
 The application can extract frames from a video and save them as image files.
 
 Example output:
 
-assets/frames/
-├── yoyo_frame.jpg
-├── frame_4.jpg
-└── frame_10.jpg
-Video Resizing
+```text
+assets/
+└── frames/
+    ├── yoyo_frame.jpg
+    ├── frame_4.jpg
+    └── frame_10.jpg
+```
+
+### Video Resizing
 
 The project supports resizing a video to 720p.
 
 Example:
 
+```text
 Input:
 yoyo.mp4
 
 Output:
 yoyo_720p.mp4
-Format Conversion
+```
 
-The application can convert video formats using FFmpeg.
+### Format Conversion
+
+The application supports video format conversion using FFmpeg.
 
 Example:
 
+```text
 MP4 → MKV
-Build Automation
+```
 
-The project includes Bash scripts to automate common development tasks.
+---
 
-Build
+## Build Automation
+
+The project includes Bash scripts for automating common development tasks.
+
+### Build Script
+
+Run:
+
+```bash
 ./scripts/build.sh
+```
 
-This configures and builds the application using CMake.
+This script configures and builds the application using CMake.
 
-Test
+### Test Script
+
+Run:
+
+```bash
 ./scripts/test.sh
+```
 
-This builds the test target and executes the test suite.
+This script builds the test target and executes the automated test suite.
 
-Deployment
+### Deployment Script
+
+Run:
+
+```bash
 ./scripts/deploy.sh
+```
 
-This creates a Release build and generates a Linux deployment package.
+This script:
 
-Deployment Package
+1. Configures a Release build
+2. Builds the application
+3. Installs the application files
+4. Creates the deployment package
 
-The deployment script generates:
+---
 
+## Deployment Package
+
+The deployment script generates a Linux package:
+
+```text
 packages/MediaPlayer-Linux.tar.gz
+```
 
-The package contains:
+The package contains the application executable and required project assets:
 
+```text
 MediaPlayer-Linux.tar.gz
 │
 ├── bin/
@@ -236,97 +318,170 @@ MediaPlayer-Linux.tar.gz
 └── share/
     └── MediaPlayer/
         └── assets/
+```
 
-The generated executable is a Linux x86-64 ELF executable.
+The generated application executable is a Linux **x86-64 ELF executable**.
 
-CI/CD
+---
 
-GitHub Actions is used to automate the build and testing process.
+## CI/CD
 
-For every push to the main branch, the CI pipeline:
+GitHub Actions is used to automate the build, testing, and packaging process.
 
+For every push to the `main` branch, the CI pipeline performs:
+
+```text
 Git Push
-   ↓
+   │
+   ▼
 Checkout Code
-   ↓
+   │
+   ▼
 Install Dependencies
-   ↓
+   │
+   ▼
 Configure CMake
-   ↓
+   │
+   ▼
 Build Application
-   ↓
+   │
+   ▼
 Run Tests
-   ↓
+   │
+   ▼
 Create Deployment Package
-   ↓
+   │
+   ▼
 Upload Artifact
+```
 
-Workflow file:
+CI workflow:
 
+```text
 .github/workflows/ci.yml
-Automated Releases
+```
 
-Version tags trigger the release workflow.
+This helps ensure that changes are automatically built and tested before being considered ready.
 
-Example:
+---
 
+## Automated Releases
+
+Version tags trigger the automated release workflow.
+
+For example:
+
+```bash
 git tag v1.0.0
 git push origin v1.0.0
+```
 
-The release pipeline:
+The release pipeline performs:
 
+```text
 Version Tag
-    ↓
+    │
+    ▼
 Build
-    ↓
-Test
-    ↓
-Package
-    ↓
-GitHub Release
-    ↓
+    │
+    ▼
+Run Tests
+    │
+    ▼
+Create Package
+    │
+    ▼
+Create GitHub Release
+    │
+    ▼
 MediaPlayer-Linux.tar.gz
+```
 
 Release workflow:
 
+```text
 .github/workflows/release.yml
-Version
+```
+
+---
+
+## Release
 
 Current release:
 
+```text
 v1.0.0
-Development Workflow
+```
 
-The project follows a basic software development workflow:
+The release package is generated automatically as:
 
+```text
+MediaPlayer-Linux.tar.gz
+```
+
+---
+
+## Development Workflow
+
+The project follows a simple development and delivery workflow:
+
+```text
 Development
-     ↓
+     │
+     ▼
 Git Commit
-     ↓
+     │
+     ▼
 Git Push
-     ↓
+     │
+     ▼
 GitHub Actions
-     ↓
-Build
-     ↓
-Unit Tests
-     ↓
-Package
-     ↓
-Release
-Future Improvements
+     │
+     ├── Build
+     ├── Test
+     └── Package
+     │
+     ▼
+Version Tag
+     │
+     ▼
+Automated Release
+```
+
+---
+
+## Key Engineering Practices
+
+The project demonstrates the following software engineering practices:
+
+* Modular C++ design
+* Header/source file separation
+* Object-oriented programming
+* CMake-based build management
+* Automated unit testing
+* Bash scripting and automation
+* Version control using Git
+* CI/CD using GitHub Actions
+* Automated deployment packaging
+* Versioned software releases
+* Linux-based development
+
+---
+
+## Future Improvements
 
 Possible future enhancements include:
 
-Playlist support
-Subtitle support
-Playback speed control
-Improved error handling
-Cross-platform builds
-Hardware-accelerated video decoding
-More comprehensive unit and integration tests
+* Playlist support
+* Subtitle support
+* Playback speed control
+* Improved error handling
+* Cross-platform builds
+* Hardware-accelerated video decoding
+* More comprehensive unit and integration tests
 
-License
+---
 
-This project is intended for educational and portfolio purposes.
+## License
 
+This project is intended for **educational and portfolio purposes**.
