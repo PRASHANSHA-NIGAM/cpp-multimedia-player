@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/bb2030d4-6c12-497a-8f43-2ea61b79c540
-
 # C++ Multimedia Player
 
 A Linux-based multimedia player built using **C++17, Qt 6, FFmpeg, and CMake**.
@@ -490,7 +486,7 @@ Possible future enhancements include:
 
 This project is intended for **educational and portfolio purposes**.
 
-https://github.com/user-attachments/assets/9ba3d216-0741-4105-8cb5-c9703860e04f
+https://github.com/user-attachments/assets/bb2030d4-6c12-497a-8f43-2ea61b79c540
 
 
 
