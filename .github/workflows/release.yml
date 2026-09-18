@@ -1,0 +1,60 @@
+name: C++ Multimedia Player Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            cmake \
+            qt6-base-dev \
+            qt6-multimedia-dev \
+            libgtest-dev \
+            ffmpeg
+
+      # 3. Configure Release build
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
+      # 4. Build application
+      - name: Build application
+        run: |
+          cmake --build build
+
+      # 5. Run tests
+      - name: Run tests
+        run: |
+          ctest --test-dir build --output-on-failure
+
+      # 6. Create deployment package
+      - name: Create deployment package
+        run: |
+          chmod +x scripts/deploy.sh
+          ./scripts/deploy.sh
+
+      # 7. Create GitHub Release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packages/MediaPlayer-Linux.tar.gz
+          generate_release_notes: true
