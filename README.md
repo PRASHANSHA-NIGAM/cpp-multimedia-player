@@ -486,8 +486,6 @@ Possible future enhancements include:
 
 This project is intended for **educational and portfolio purposes**.
 
-https://github.com/user-attachments/assets/117bc428-8623-464e-a77b-90bd7dc3a6e9
-
 https://github.com/user-attachments/assets/9ba3d216-0741-4105-8cb5-c9703860e04f
 
 
